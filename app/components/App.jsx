@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { increment } from '../madlibs';
+import { increment, submitField } from '../madlibs';
 
 
 require('./App.scss');
@@ -10,7 +10,18 @@ const App = React.createClass({
     dispatch: PropTypes.func.isRequired,
     counter: PropTypes.number.isRequired,
     fieldOrder: PropTypes.array.isRequired,
-    fields: PropTypes.array.isRequired,
+    fields: PropTypes.object.isRequired,
+    value: PropTypes.string,
+  },
+  // constructor(props){
+  //     super(props)
+  //     this.submit = this.submit.bind(this)
+  // },
+
+  submitForm(e, key) {
+    e.preventDefault();
+    console.log(key, this.refs[key].value);
+    this.props.dispatch(submitField(key, this.refs[key].value));
   },
 
   render() {
@@ -22,24 +33,31 @@ const App = React.createClass({
               Increment
             </button>
           </p>
-          { this.props.fieldOrder.map((key, index) => (
+          <form ref="madLibEssay" onSubmit={this.submitForm}>
+          { this.props.fieldOrder.map((key) => (
             <div>
-              <label>{this.props.fields[key]}</label>
+              <label htmlFor={key}>{this.props.fields[key]}</label>
               <input
-                className="'blurry_form"
-                id={index}
+                defaultValue = ""
+                id={key}
                 onKeyDown= {this.handleKeyDown}
                 className= "form-input"
-                ref= "title"
-                type= "textarea"
-                data-autosize-input= '{ "space": 40 }'
-                onBlur= {event => {
+                ref= {key}
+                name= {key}
+                type= "text"
+                onBlur= {() => {
                   // title.onBlur(event);
-                  this.props.dispatch(increment(event));
+                  // this.props.dispatch(submitField(key, this.props.value));
+                  console.log(this.refs.madLibEssay);
+                  this.submitForm(event, key);
                 }}
               />
             </div>
           ))}
+          <button >
+            submit
+          </button>
+          </form>
         </div>
     );
   },
