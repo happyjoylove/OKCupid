@@ -8,6 +8,7 @@ const App = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     counter: PropTypes.number.isRequired,
+    fieldOrder: PropTypes.array.isRequired,
   },
 
   render() {
@@ -20,6 +21,25 @@ const App = React.createClass({
               Increment
             </button>
           </p>
+          { this.props.fieldOrder.map((key, index) => (
+            <div>
+              <label>{key}</label>
+              <input
+                className="'blurry_form"
+                id={index}
+                onKeyDown= {this.handleKeyDown}
+                className= "form-input"
+                ref= "title"
+                type= "textarea"
+                data-autosize-input= '{ "space": 40 }'
+                onBlur= {event => {
+                  // title.onBlur(event);
+                  this.props.dispatch(increment(event));
+                }}
+                >
+              </input>
+            </div>
+          ))}
         </div>
     );
   },
