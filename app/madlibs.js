@@ -1,5 +1,5 @@
 import {
-  FIELD_NAMES,
+  FIELD_NAMES, FIELDS,
 } from './constants';
 
 
@@ -22,7 +22,7 @@ export const INITIAL_STATE = {
     FIELD_NAMES.messageIf,
     FIELD_NAMES.bar,
   ],
-
+  fields: FIELDS,
   fieldAnswers: {},
   essayText: '',
 

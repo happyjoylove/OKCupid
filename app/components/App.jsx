@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { increment } from '../madlibs';
 
+
 require('./App.scss');
 
 const App = React.createClass({
@@ -9,13 +10,13 @@ const App = React.createClass({
     dispatch: PropTypes.func.isRequired,
     counter: PropTypes.number.isRequired,
     fieldOrder: PropTypes.array.isRequired,
+    fields: PropTypes.array.isRequired,
   },
 
   render() {
     return (
         <div className="matchArea">
           <p>Counter (to make sure redux works): {this.props.counter}</p>
-
           <p>
             <button onClick={() => this.props.dispatch(increment())}>
               Increment
@@ -23,7 +24,7 @@ const App = React.createClass({
           </p>
           { this.props.fieldOrder.map((key, index) => (
             <div>
-              <label>{key}</label>
+              <label>{this.props.fields[key]}</label>
               <input
                 className="'blurry_form"
                 id={index}
@@ -36,8 +37,7 @@ const App = React.createClass({
                   // title.onBlur(event);
                   this.props.dispatch(increment(event));
                 }}
-                >
-              </input>
+              />
             </div>
           ))}
         </div>
