@@ -25,7 +25,6 @@ export const INITIAL_STATE = {
   fields: FIELDS,
   fieldAnswers: {},
   essayText: '',
-
   counter: 1,
 };
 
@@ -38,10 +37,13 @@ export function reducer(state = INITIAL_STATE, action) {
     case SUBMIT_FIELD: {
       console.log('submitting', action);
       console.log('current state submmit', state);
-      state.fieldAnswers[action.fieldName]=action.answer;
+      if (action.answer.length > 0) {
+        state.fieldAnswers[action.fieldName] = action.answer;
+      }
       return Object.assign({}, state,
         {
-          fieldAnswers:state.fieldAnswers ,
+          fieldAnswers: state.fieldAnswers,
+          counter: state.counter + 1,
         }
       );
     }

@@ -13,18 +13,17 @@ const App = React.createClass({
     fields: PropTypes.object.isRequired,
     value: PropTypes.string,
   },
-  // constructor(props){
-  //     super(props)
-  //     this.submit = this.submit.bind(this)
-  // },
-
   submitForm(e, key) {
     e.preventDefault();
     console.log(key, this.refs[key].value);
-    this.props.dispatch(submitField({ id: key, answer: this.refs[key].value } ));
+    this.props.dispatch(submitField(
+      {
+        id: key,
+        answer: this.refs[key].value,
+      }
+    ));
     // console.log('next state', store.getState());
   },
-
   render() {
     return (
         <div className="matchArea">

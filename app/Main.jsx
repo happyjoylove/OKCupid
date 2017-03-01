@@ -8,14 +8,8 @@ import App from './components/App.jsx';
 
 const store = createStore(reducer);
 console.log('initial state', store.getState());
-// store.dispatch({
-//   type: submi,
-//   payload: {
-//     id: '1',
-//     answer: 'hello',
-//   },
-// });
-
+window.store = store;
+store.subscribe(() => console.log(store.getState()));
 ReactDOM.render(
   <Provider store={store}>
     <App />
