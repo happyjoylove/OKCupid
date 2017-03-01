@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { increment, submitField } from '../madlibs';
+import { increment, submitField, submitEssay } from '../madlibs';
 
 
 require('./App.scss');
@@ -23,7 +23,19 @@ const App = React.createClass({
           answer: this.refs[key].value,
         }
       ));
+      this.submitText(key,this.refs[key].value);
     }
+    // console.log('next state', store.getState());
+  },
+  submitText(key,value) {
+
+    console.log('Submitting Essay', key);
+    this.props.dispatch(submitEssay(
+      {
+        id: key,
+        answer: this.refs[key].value,
+      }
+    ));
     // console.log('next state', store.getState());
   },
   render() {

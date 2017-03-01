@@ -1,5 +1,5 @@
 import {
-  FIELD_NAMES, FIELDS,
+  FIELD_NAMES, FIELDS, getTextTemplate
 } from './constants';
 
 
@@ -7,6 +7,7 @@ import {
 // ----------------------------------------------------------------------------
 
 export const SUBMIT_FIELD = 'MADLIBS.SUBMIT_FIELD';
+export const SUBMIT_ESSAY = 'MADLIBS.SUBMIT_ESSAY';
 export const INCREMENT_COUNTER = 'MADLIBS.INCREMENT_COUNTER';
 
 
@@ -40,7 +41,18 @@ export function reducer(state = INITIAL_STATE, action) {
       state.fieldAnswers[action.fieldName] = action.answer;
       return Object.assign({}, state,
         {
+          essayText: JSON.stringify(state.fieldAnswers, {indent: false}),
           fieldAnswers: state.fieldAnswers,
+          counter: state.counter + 1,
+        }
+      );
+    }
+
+    case SUBMIT_ESSAY: {
+      console.log('submitting essay');
+      console.log(getTextTemplate(action.fieldName));
+      return Object.assign({}, state,
+        {
           counter: state.counter + 1,
         }
       );
@@ -65,6 +77,10 @@ export function reducer(state = INITIAL_STATE, action) {
 
 export function submitField({ id, answer }) {
   return { type: SUBMIT_FIELD, fieldName: id, answer };
+}
+
+export function submitEssay({ id, answer }) {
+  return { type: SUBMIT_ESSAY, fieldName: id, answer };
 }
 
 export function increment() {
