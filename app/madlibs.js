@@ -50,7 +50,12 @@ export function reducer(state = INITIAL_STATE, action) {
 
     case SUBMIT_ESSAY: {
       console.log('submitting essay');
-      console.log(getTextTemplate(action.fieldName));
+      const newAnswer = state.fieldAnswers[action.fieldName];
+      const textarr = getTextTemplate(action.fieldName);
+      console.log(state.fieldAnswers[action.fieldName]);
+      const randstring = textarr[0];
+      const parsedTemplate = randstring.replace("$answer", "<b>"+newAnswer+"</b>");
+      console.log(parsedTemplate);
       return Object.assign({}, state,
         {
           counter: state.counter + 1,
