@@ -37,9 +37,7 @@ export function reducer(state = INITIAL_STATE, action) {
     case SUBMIT_FIELD: {
       console.log('submitting', action);
       console.log('current state submmit', state);
-      if (action.answer.length > 0) {
-        state.fieldAnswers[action.fieldName] = action.answer;
-      }
+      state.fieldAnswers[action.fieldName] = action.answer;
       return Object.assign({}, state,
         {
           fieldAnswers: state.fieldAnswers,

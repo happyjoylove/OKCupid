@@ -16,12 +16,14 @@ const App = React.createClass({
   submitForm(e, key) {
     e.preventDefault();
     console.log(key, this.refs[key].value);
-    this.props.dispatch(submitField(
-      {
-        id: key,
-        answer: this.refs[key].value,
-      }
-    ));
+    if (this.refs[key].value.length > 0) {
+      this.props.dispatch(submitField(
+        {
+          id: key,
+          answer: this.refs[key].value,
+        }
+      ));
+    }
     // console.log('next state', store.getState());
   },
   render() {
@@ -46,9 +48,6 @@ const App = React.createClass({
                 name= {key}
                 type= "text"
                 onBlur= {() => {
-                  // title.onBlur(event);
-                  // this.props.dispatch(submitField(key, this.props.value));
-                  console.log(this.refs.madLibEssay);
                   this.submitForm(event, key);
                 }}
               />
