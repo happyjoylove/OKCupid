@@ -21,7 +21,8 @@ const App = React.createClass({
   submitForm(e, key) {
     e.preventDefault();
     console.log(key, this.refs[key].value);
-    this.props.dispatch(submitField(key, this.refs[key].value));
+    this.props.dispatch(submitField({ id: key, answer: this.refs[key].value } ));
+    // console.log('next state', store.getState());
   },
 
   render() {
