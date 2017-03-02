@@ -1,5 +1,5 @@
 import {
-  FIELD_NAMES, FIELDS, getTextTemplate
+  FIELD_NAMES, FIELDS, getTextTemplate,
 } from './constants';
 
 
@@ -38,10 +38,11 @@ export function reducer(state = INITIAL_STATE, action) {
     case SUBMIT_FIELD: {
       console.log('submitting', action);
       console.log('current state submmit', state);
-      state.fieldAnswers[action.fieldName] = action.answer;
+      const newStateField = state.fieldAnswers;
+      newStateField[action.fieldName] = action.answer;
       return Object.assign({}, state,
         {
-          fieldAnswers: state.fieldAnswers,
+          fieldAnswers: newStateField,
           // counter: state.counter + 1,
         }
       );
@@ -53,14 +54,15 @@ export function reducer(state = INITIAL_STATE, action) {
       const textarr = getTextTemplate(action.fieldName);
       console.log(state.fieldAnswers[action.fieldName]);
 
-        const  min = Math.ceil(0);
-        const  max = Math.floor(textarr.length);
-        const  randomIndex = Math.floor(Math.random() * (max - min)) + min;
-        console.log('Random index', randomIndex);
+      const min = Math.ceil(0);
+      const max = Math.floor(textarr.length);
+      const randomIndex = Math.floor(Math.random() * (max - min)) + min;
+      console.log('Random index', randomIndex);
       const randstring = textarr[randomIndex];
-      let parsedTemplate = randstring.replace("$answer", "<b>"+newAnswer+"</b>");
-      console.log('current text ',state);
-      parsedTemplate = state.essayText+parsedTemplate;
+      const newAnswerHTML = `<b> ${newAnswer} </b>`;
+      let parsedTemplate = randstring.replace('$answer', newAnswerHTML);
+      console.log('current text ', state);
+      parsedTemplate = state.essayText + parsedTemplate;
       return Object.assign({}, state,
         {
           essayText: parsedTemplate,

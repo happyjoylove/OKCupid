@@ -10,10 +10,9 @@ const store = createStore(reducer);
 console.log('initial state', store.getState());
 window.store = store;
 store.subscribe(() => {
-    console.log(store.getState());
-    let newstate = store.getState();
-    document.getElementById("demo").innerHTML = '<div className="row">'+newstate.essayText+'</div>';
-
+  console.log(store.getState());
+  const newstate = store.getState();
+  document.getElementById('demo').innerHTML = `<div className="row">${newstate.essayText}</div>`;
 });
 ReactDOM.render(
   <Provider store={store}>

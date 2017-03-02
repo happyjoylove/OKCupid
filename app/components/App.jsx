@@ -23,12 +23,11 @@ const App = React.createClass({
           answer: this.refs[key].value,
         }
       ));
-      this.submitText(key,this.refs[key].value);
+      this.submitText(key);
     }
     // console.log('next state', store.getState());
   },
-  submitText(key,value) {
-
+  submitText(key) {
     console.log('Submitting Essay', key);
     this.props.dispatch(submitEssay(
       {
