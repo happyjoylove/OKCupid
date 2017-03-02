@@ -41,7 +41,6 @@ export function reducer(state = INITIAL_STATE, action) {
       state.fieldAnswers[action.fieldName] = action.answer;
       return Object.assign({}, state,
         {
-          essayText: JSON.stringify(state.fieldAnswers, {indent: false}),
           fieldAnswers: state.fieldAnswers,
           counter: state.counter + 1,
         }
@@ -53,11 +52,18 @@ export function reducer(state = INITIAL_STATE, action) {
       const newAnswer = state.fieldAnswers[action.fieldName];
       const textarr = getTextTemplate(action.fieldName);
       console.log(state.fieldAnswers[action.fieldName]);
-      const randstring = textarr[0];
-      const parsedTemplate = randstring.replace("$answer", "<b>"+newAnswer+"</b>");
-      console.log(parsedTemplate);
+
+        const  min = Math.ceil(0);
+        const  max = Math.floor(textarr.length);
+        const  randomIndex = Math.floor(Math.random() * (max - min)) + min;
+        console.log('Random index', randomIndex);
+      const randstring = textarr[randomIndex];
+      let parsedTemplate = randstring.replace("$answer", "<b>"+newAnswer+"</b>");
+      console.log('current text ',state);
+      parsedTemplate = state.essayText+parsedTemplate;
       return Object.assign({}, state,
         {
+          essayText: parsedTemplate,
           counter: state.counter + 1,
         }
       );
