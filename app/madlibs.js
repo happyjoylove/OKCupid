@@ -42,7 +42,7 @@ export function reducer(state = INITIAL_STATE, action) {
       return Object.assign({}, state,
         {
           fieldAnswers: state.fieldAnswers,
-          counter: state.counter + 1,
+          // counter: state.counter + 1,
         }
       );
     }
