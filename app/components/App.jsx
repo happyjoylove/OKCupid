@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { increment, submitField, submitEssay } from '../madlibs';
+import { submitField, submitEssay } from '../madlibs';
 import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -16,7 +16,7 @@ const App = React.createClass({
   },
   submitForm(e, key) {
     e.preventDefault();
-    console.log(key, this.refs[key].value);
+    // console.log(key, this.refs[key].value);
     if (this.refs[key].value.length > 0) {
       this.props.dispatch(submitField(
         {
@@ -29,7 +29,7 @@ const App = React.createClass({
     // console.log('next state', store.getState());
   },
   submitText(key) {
-    console.log('Submitting Essay', key);
+    // console.log('Submitting Essay', key);
     this.props.dispatch(submitEssay(
       {
         id: key,
@@ -38,29 +38,25 @@ const App = React.createClass({
     ));
     // console.log('next state', store.getState());
   },
+
   render() {
     return (
       <MuiThemeProvider>
         <div className="container">
-          <div className="row ">
-            <div className="col s12 m6">
-              <div className="matchArea card">
-                <p>Counter (to make sure redux works): {this.props.counter}</p>
+          <div className="row white card">
+            <div className="col s12 m6  blue-grey lighten-5">
+              <div className="matchArea row">
+                <form ref="madLibEssay" className="col 12">
+                <h5>About me</h5>
                 <Divider />
-                <p>
-                  <button onClick={() => this.props.dispatch(increment())}>
-                    Increment
-                  </button>
-                </p>
-                <form ref="madLibEssay" onSubmit={this.submitForm}>
                 { this.props.fieldOrder.map((key) => (
-                  <div>
+                  <div key={key}>
                     <label htmlFor={key}>{this.props.fields[key]}</label>
                     <input
                       defaultValue = ""
                       id={key}
                       onKeyDown= {this.handleKeyDown}
-                      className= "form-input"
+                      className= "form-input white card"
                       ref= {key}
                       name= {key}
                       type= "text"
@@ -70,14 +66,14 @@ const App = React.createClass({
                     />
                   </div>
                 ))}
-                <button >
-                  submit
-                </button>
                 </form>
               </div>
             </div>
-            <div className="col s12 m6 green">
-
+            <div className="col s12 m6">
+              <h5>Your essay text</h5>
+              <Divider />
+              <div id="demo">
+              </div>
             </div>
           </div>
         </div>

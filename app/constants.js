@@ -90,11 +90,11 @@ export function getTextTemplate(fieldName) {
 
     case FIELD_NAMES.messageIf: {
       return [
-        'Message if you $answer',
-        'Hit me up if you $answer',
-        'If you $answer, we need to meet',
-        'Send me a message if you $answer',
-        'If you $answer, let’s chat',
+        'Message if you $answer.',
+        'Hit me up if you $answer.',
+        'If you $answer, we need to meet.',
+        'Send me a message if you $answer.',
+        'If you $answer, let’s chat.',
       ];
     }
 
