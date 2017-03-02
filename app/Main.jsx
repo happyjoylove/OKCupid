@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { reducer } from './madlibs';
-
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import RaisedButton from 'material-ui/RaisedButton';
+// import AppBar from 'material-ui/AppBar';
+// import { List } from 'material-ui/List';
+// import Divider from 'material-ui/Divider';
 import App from './components/App.jsx';
 
 const store = createStore(reducer);
@@ -17,6 +21,7 @@ store.subscribe(() => {
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+,
   document.body.appendChild(document.createElement('div'))
 );
